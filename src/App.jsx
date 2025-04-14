@@ -1,18 +1,24 @@
+import { useState } from "react"
 import Player from "./components/Player/Player"
+import GameBoard from "./components/GameBoard/GameBoard"
+import Log from "./components/Log/Log"
 
-function App() {
-  
+const App = () => {
+  const [activePlayer, setActivePlayer] = useState('X')
+  const handleActivePlayer = () => {
+    setActivePlayer(currentActivePlayer => currentActivePlayer === 'X' ? 'O' : 'X')
+  }
 
   return (
     <main>
       <div id="game-container">
         <ol id="players">
-          <Player initilName={'Vasa'} symbol={'X'}/>
-          <Player initilName={'Petro'} symbol={'O'}/>
+          <Player initilName={'Vasa'} symbol={'X'} isActive={activePlayer === 'X'} />
+          <Player initilName={'Petro'} symbol={'O'} isActive={activePlayer === 'O'} />
         </ol>
-        Game board
+        <GameBoard activePlayer={activePlayer} handleActivePlayer={handleActivePlayer} />
       </div>
-      LOG
+      <Log />
     </main>
   )
 }
